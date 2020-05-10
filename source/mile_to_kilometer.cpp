@@ -21,6 +21,6 @@ int zahl1_20() {
 
 int main()
 {
-  std::cout << "Task 1.3: " << zahl1_20() << std::endl;
+  std::cout << zahl1_20() << std::endl;
   return 0;
 }
