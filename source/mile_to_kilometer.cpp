@@ -1,26 +1,16 @@
 #include <iostream>
 
 
-int zahl1_20() {
-  bool not_found = true;
-  int number = 20;
-  while (not_found) {
-    for (int i = 1; i <= 20; ++i) {
-      if (number%i != 0) {
-        number+=20;
-        break;
-      }
-      if (i==20) {
-        not_found = false;
-      }
-    }
-  }
-  return number;
+float miles_to_kilometer(float miles) {
+  return miles*1.60934;
 }
 
 
 int main()
 {
-  std::cout << zahl1_20() << std::endl;
+  std::cout << "Hallo! Ich rechne Meilen in Kilometer um. Bitte geben Sie mir eine Zahl in Meilen."  << std::endl;
+  float miles;
+  std::cin >> miles;
+  std::cout << "Hier ist Ihre Zahl in Kilometer: " << miles_to_kilometer(miles) << std::endl;
   return 0;
 }
