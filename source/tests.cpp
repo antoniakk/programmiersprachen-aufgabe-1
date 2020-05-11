@@ -100,6 +100,27 @@ TEST_CASE("describe_factorial", "[factorial]") {
   REQUIRE(factorial(7) == 5040);
 }
 
+bool is_prime(int a) {
+  if (abs(a) == 1 || a == 0) {
+    return false;
+  }
+  for (int i = 2; i < abs(a); ++i) {
+    if (abs(a) % i == 0) {
+      return false;
+      break;
+    }
+  }
+  return true;
+}
+
+TEST_CASE("describe_is_prime", "[is_prime]") {
+  REQUIRE(is_prime(3) == true);
+  REQUIRE(is_prime(1) == false);
+  REQUIRE(is_prime(0) == false);
+  REQUIRE(is_prime(-17) == true);
+  REQUIRE(is_prime(-1) == false);
+}
+
 int main(int argc, char* argv[])
 {
   return Catch::Session().run(argc, argv);
