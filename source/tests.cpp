@@ -25,7 +25,7 @@ TEST_CASE("describe_gcd", "[gcd]") {
 }
 
 int checksum(int n) {
-  std::string n_str = std::to_string(n);
+  std::string n_str = std::to_string(abs(n));
   int checksum = 0;
   for(int i = 0; i < n_str.size(); ++i) {
     char temp = n_str[i];
@@ -39,6 +39,9 @@ TEST_CASE("describe_checksum", "[checksum]") {
   REQUIRE(checksum(122266) == 19);
   REQUIRE(checksum(10079) == 17);
   REQUIRE(checksum(735564) == 30);
+  REQUIRE(checksum(0) == 0);
+  REQUIRE(checksum(1) == 1);
+  REQUIRE(checksum(-735564) == 30);
 }
 
 int sum_multiples() {
@@ -57,16 +60,22 @@ TEST_CASE("describe_sum_multiples", "[sum_multiples]") {
 
 float fract(float a) {
   int a_int = a;
-  return a - a_int;
+  return abs(a - a_int);
 }
 
 TEST_CASE("describe_fract", "[fract]") {
   REQUIRE(fract(1.83) == Approx(0.83));
   REQUIRE(fract(2.54603) == Approx(0.54603));
   REQUIRE(fract(9.99932) == Approx(0.99932));
+  REQUIRE(fract(0) == Approx(0.0));
+  REQUIRE(fract(-1.45) == Approx(0.45));  
 }
 
 float cyl_surface(float radius, float height) {
+  if (radius < 0 || height < 0) {
+    std::cout << "The parameters cannot be negative." << std::endl;
+    return 0;
+  }
   return (2*radius*M_PI*(height + radius));
 }
 
@@ -74,9 +83,19 @@ TEST_CASE("describe_cyl_surface", "[cyl_surface]") {
   REQUIRE(cyl_surface(4.5, 5.7) == Approx(288.4));
   REQUIRE(cyl_surface(9.99, 10) == Approx(1254.75));
   REQUIRE(cyl_surface(2.4, 13.3) == Approx(236.75));
+  REQUIRE(cyl_surface(0, 0) == Approx(0));
+  REQUIRE(cyl_surface(0, 5.63) == Approx(0));
+  REQUIRE(cyl_surface(6.78, 0) == Approx(288.827975));
+  REQUIRE(cyl_surface(-1, 1) == Approx(0));
+  REQUIRE(cyl_surface(-1, -1) == Approx(0));
+  REQUIRE(cyl_surface(1, -1) == Approx(0));
 }
 
 float cyl_volume(float radius, float height) {
+  if (radius < 0 || height < 0) {
+    std::cout << "The parameters cannot be negative." << std::endl;
+    return 0;
+  }
   return M_PI*radius*radius*height;
 }
 
@@ -84,6 +103,12 @@ TEST_CASE("describe_cyl_volume", "[cyl_volume]") {
   REQUIRE(cyl_volume(4.5, 5.7) == Approx(362.618));
   REQUIRE(cyl_volume(9.99, 10) == Approx(3135.31));
   REQUIRE(cyl_volume(2.4, 13.3) == Approx(240.67));
+  REQUIRE(cyl_volume(0, 0) == Approx(0));
+  REQUIRE(cyl_volume(0, 5.63) == Approx(0));
+  REQUIRE(cyl_volume(7.83, 0) == Approx(0));
+  REQUIRE(cyl_volume(-1, 1) == Approx(0));
+  REQUIRE(cyl_volume(-1, -1) == Approx(0));
+  REQUIRE(cyl_volume(1, -1) == Approx(0));
   }
 
 unsigned int factorial(unsigned int N) {
@@ -98,6 +123,7 @@ TEST_CASE("describe_factorial", "[factorial]") {
   REQUIRE(factorial(3) == 6);
   REQUIRE(factorial(0) == 1);
   REQUIRE(factorial(7) == 5040);
+  REQUIRE(factorial(1) == 1);
 }
 
 bool is_prime(int a) {
