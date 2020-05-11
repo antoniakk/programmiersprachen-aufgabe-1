@@ -84,6 +84,20 @@ TEST_CASE("describe_cyl_volume", "[cyl_volume]") {
   REQUIRE(cyl_volume(4.5, 5.7) == Approx(362.618));
   REQUIRE(cyl_volume(9.99, 10) == Approx(3135.31));
   REQUIRE(cyl_volume(2.4, 13.3) == Approx(240.67));
+  }
+
+unsigned int factorial(unsigned int N) {
+  unsigned int fact_of_N = 1;
+  for(int i = N; i > 1; --i) {
+    fact_of_N *= i;
+  }
+  return fact_of_N;
+}
+
+TEST_CASE("describe_factorial", "[factorial]") {
+  REQUIRE(factorial(3) == 6);
+  REQUIRE(factorial(0) == 1);
+  REQUIRE(factorial(7) == 5040);
 }
 
 int main(int argc, char* argv[])
