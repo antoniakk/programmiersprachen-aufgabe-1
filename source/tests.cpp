@@ -54,6 +54,16 @@ TEST_CASE("describe_sum_multiples", "[sum_multiples]") {
   REQUIRE(sum_multiples() == 234168);
 }
 
+float fract(float a) {
+  int a_int = a;
+  return a - a_int;
+}
+
+TEST_CASE("describe_fract", "[fract]") {
+  REQUIRE(fract(1.83) == Approx(0.83));
+  REQUIRE(fract(2.54603) == Approx(0.54603));
+  REQUIRE(fract(9.99932) == Approx(0.99932));
+}
 
 int main(int argc, char* argv[])
 {
