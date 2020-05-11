@@ -4,7 +4,16 @@
 #include <cmath>
 
 int gcd(int a, int b) {
-  return 1;
+  if (a < b) {
+    gcd(b, a);
+  }
+  if (b == 0) {
+    return a;
+  }
+  else {
+    return gcd(b, a % b);
+  }
+  
 }
 
 TEST_CASE("describe_gcd", "[gcd]") {
