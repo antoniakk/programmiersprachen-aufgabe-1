@@ -58,6 +58,26 @@ TEST_CASE("describe_sum_multiples", "[sum_multiples]") {
   REQUIRE(sum_multiples() == 234168);
 }
 
+int sum_multiples_x(unsigned int x) {
+  if (x==0) {
+    std::cout << "The number must be at least 1." << std::endl;
+  } 
+  int sum = 0;
+  for(int i = 1; i <= x; ++i) {
+    if (i%3 == 0 || i%5 == 0) {
+      sum += i;
+    }
+  }
+  return sum;
+}
+
+TEST_CASE("describe_sum_multiples_x", "[sum_multiples_x]") {
+  REQUIRE(sum_multiples_x(1000) == 234168);
+  REQUIRE(sum_multiples_x(10) == 33);
+  REQUIRE(sum_multiples_x(0) == 0);
+  REQUIRE(sum_multiples_x(1) == 0);
+}
+
 float fract(float a) {
   int a_int = a;
   return abs(a - a_int);
