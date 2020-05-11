@@ -3,6 +3,7 @@
 #include <catch.hpp>
 #include <cmath>
 #include <string>
+#include <cmath>
 
 int gcd(int a, int b) {
   if (a < b) {
@@ -63,6 +64,26 @@ TEST_CASE("describe_fract", "[fract]") {
   REQUIRE(fract(1.83) == Approx(0.83));
   REQUIRE(fract(2.54603) == Approx(0.54603));
   REQUIRE(fract(9.99932) == Approx(0.99932));
+}
+
+float cyl_surface(float radius, float height) {
+  return (2*radius*M_PI*(height + radius));
+}
+
+TEST_CASE("describe_cyl_surface", "[cyl_surface]") {
+  REQUIRE(cyl_surface(4.5, 5.7) == Approx(288.4));
+  REQUIRE(cyl_surface(9.99, 10) == Approx(1254.75));
+  REQUIRE(cyl_surface(2.4, 13.3) == Approx(236.75));
+}
+
+float cyl_volume(float radius, float height) {
+  return M_PI*radius*radius*height;
+}
+
+TEST_CASE("describe_cyl_volume", "[cyl_volume]") {
+  REQUIRE(cyl_volume(4.5, 5.7) == Approx(362.618));
+  REQUIRE(cyl_volume(9.99, 10) == Approx(3135.31));
+  REQUIRE(cyl_volume(2.4, 13.3) == Approx(240.67));
 }
 
 int main(int argc, char* argv[])
